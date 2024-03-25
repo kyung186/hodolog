@@ -30,6 +30,8 @@ public class PostController {
 
     @PostMapping("/posts")
     public void post(@RequestBody @Valid PostCreate request) {
+        request.validate();
+        postService.write(request);
         // Case1. 저장한 데이터 Entity -> response로 응답하기
         // Case2. 저장한 데이터의 primary_id -> response로 응답하기
         //          Client에서는 수신한 id를 글 조회 API를 통해서 데이터를 수신받음
@@ -37,7 +39,7 @@ public class PostController {
         // Bad Case: 서버에서 -> 반드시 이렇게 할 겁니다! fix
         //          -> 서버에서 차라리 유연하게 대응하는게 좋습니다. -> 코드를 잘 짜야겠죠?
         //          -> 한 번에 일괄적으로 잘 처리되는 케이스가 없습니다. -> 잘 관리하는 형태가 중요
-        postService.write(request);
+
     }
 
     @GetMapping("/posts/{postId}")
@@ -64,7 +66,7 @@ public class PostController {
         postService.edit(postId, request);
     }
 
-    @DeleteMapping("/posts/{postId")
+    @DeleteMapping("/posts/{postId}")
     public void delete(@PathVariable Long postId) {
         postService.delete(postId);
     }
