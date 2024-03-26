@@ -1,4 +1,4 @@
-package com.hodolog.controller;
+package com.hodolog.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hodolog.api.domain.Post;
@@ -276,6 +276,17 @@ class PostControllerTest {
                 .andExpect(status().isBadRequest())
                 .andDo(print()); // 요청에 대한 summary
     }
+
+// API 문서 생성
+// GET /posts/{postId} -> 단건 조회
+// POST /posts -> 게시글 등록
+// 클라이언트 입장 어떤 API 있는지 모름
+
+// Spring RestDocs
+// - 운영코드에 영향X
+// - 코드 수정 -> 문서를 수정X -> 코드(기능) <-> 문서
+// - Test 케이스 실행 -> 문서를 생성해준다.
+
 
 //    @Test
 //    @DisplayName("글 제목 수정")
