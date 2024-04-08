@@ -28,8 +28,20 @@ public class PostController {
 
     private final PostService postService;
 
+    @GetMapping("/test")
+    public String test() {
+        return "hello";
+    }
+
+    @GetMapping("/foo")
+    public String foo() {
+        return "foo";
+    }
+
     @PostMapping("/posts")
     public void post(@RequestBody @Valid PostCreate request) {
+        // 1. GET Parameter
+        // 3. Header
         request.validate();
         postService.write(request);
         // Case1. 저장한 데이터 Entity -> response로 응답하기
